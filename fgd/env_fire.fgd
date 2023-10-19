@@ -1,0 +1,61 @@
+@PointClass base(Targetname, Parentname, EnableDisable) iconsprite("editor/env_fire") color(0 180 0) sphere(firesize) = env_fire : 
+	"An entity that handles a single flame at its origin. The flame causes heat 'damage' to other env_fire entities around it, and will eventually ignite non-flaming env_fire entities nearby, causing the fire to spread."
+[
+	health(integer) : "Duration" : 30 : "Amount of time the fire will burn."
+	firesize(integer) : "Size" : 64 : "Height (in world units) of the flame."
+	fireattack(integer) : "Attack" : 4 : "Amount of time the fire takes to grow to full strength."
+	firetype(choices) : "Type" : 0 =
+	[
+		0 : "Natural"
+		1 : "Plasma"
+	]
+	spawnflags(flags) =
+	[
+		1:	"Infinite Duration" : 0
+		2:	"Smokeless" : 0
+		4:	"Start On" : 0
+		8:	"Start Full" : 0
+		16:	"Don't drop" : 0
+		32: 	"No glow" : 0
+		128: 	"Delete when out" : 0
+		256: 	"Visible from above" : 0
+		512: 	"No Loop Sound" : 1 // EXTENDED_FIRE
+		1024: 	"No Ignite Sound" : 1 // EXTENDED_FIRE
+	]
+
+	ignitionpoint(float) : "Ignition Point" : 32 : "Amount of heat 'damage' to take before this flame should ignite."
+	damagescale(float) : "Damage Scale" : "1.0" : "Multiplier of the burn damage done by the flame."
+	
+	LoopSound(sound) : "Loop sound" : "d1_town.LargeFireLoop" : "Looping sound to play while this fire is burning." // EXTENDED_FIRE
+	IgniteSound(sound) : "Ignite sound" : "coast.gaspump_ignite" : "One shot sound to play when the fire starts."	 // EXTENDED_FIRE
+
+	// Inputs
+	input StartFire(void) : "Start the fire."
+	input Extinguish(float) : "Puts out the fire permanently in the number of seconds specified."
+	input ExtinguishTemporary(float): "Puts out the fire temporarily in the number of seconds specified."
+
+	// Outputs
+	output OnIgnited(void) : "Fires when the fire is first ignited."
+	output OnExtinguished(void) : "Fires when the fire is fully extinguished."
+]
+
+@PointClass base(Targetname, Parentname) size(-4 -4 -4, 4 4 4) color(255 255 0) sphere(fireradius) = env_firesensor : 
+	"An entity that detects changes in heat nearby."
+[
+	spawnflags(flags) =
+	[
+		1:	"Start On" : 1
+		2:	"Sense Fire Sources" : 0 // EXTENDED_FIRE
+		4:	"Sense Flares" : 0 // EXTENDED_FIRE
+	]
+
+	fireradius(float) : "Radius" : 128 : "The radius around this entity in which to detect heat changes."
+	heatlevel(float) : "Heat level" : 32 : "The target heat level to check for. Outputs are fired when the heat moves over this target level (increasing or decreasing)."
+	heattime(float) : "Time at level" : 0 : "The amount of time the heat level must spend over the target level before the 'OnHeatLevelStart' output is fired."
+
+	// Inputs
+	input Enable(void) : "Enable fire sensor."
+	input Disable(void) : "Disable fire sensor."
+	output OnHeatLevelStart(void) : "Fires when the heat level has been sustained for the specified length of time."
+	output OnHeatLevelEnd(void) : "Fires when the heat level drops below the target level."
+]

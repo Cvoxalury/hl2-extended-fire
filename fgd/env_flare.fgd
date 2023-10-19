@@ -1,0 +1,20 @@
+@PointClass size( -4 -4 -4, 4 4 4 ) base(Targetname, Parentname, Angles) sphere(fireradius) = env_flare : "Flare"
+[
+	scale(float) : "Scale" : 1
+	duration(float) : "Duration" : 30
+	goalheat(float) : "Goal Heat Level" : 32 // EXTENDED_FIRE
+	fireradius(float) : "Heat Radius" : 64 // EXTENDED_FIRE
+	
+	spawnflags(Flags) =
+	[
+		1 : "No DLight" : 0
+		2 : "No Smoke" : 0
+		4 : "Infinite" : 0
+		8 : "Start off" : 0
+	]
+
+	input Start(float) : "Starts the flare burning. The flare will burn for the specified number of seconds (0 = infinite)."
+	input Die(float) : "Causes the flare to fade out over the specified number of seconds, and then die (0 = die instantly)."
+	input Launch(float) : "Launch the flare forward with the specified speed."
+	input SetGoalHeatLevel(float) : "Sets the max heat level for this flare." // EXTENDED_FIRE
+]
