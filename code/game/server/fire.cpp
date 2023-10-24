@@ -816,7 +816,7 @@ void CFire::SpawnEffect( fireType_e type, float scale )
 			m_takedamage	= DAMAGE_YES;
 			
 #ifdef EXTENDED_FIRE
-		if ((m_spawnflags & SF_FIRE_NO_SOUND) == false)
+		if (HasSpawnFlags(SF_FIRE_DO_SOUND))
 		{
 			if (m_LoopSoundName.ToCStr() && m_LoopSoundName.ToCStr()[0] != '\0')
 			{
@@ -830,7 +830,7 @@ void CFire::SpawnEffect( fireType_e type, float scale )
 				}
 			}
 		}
-		if ((m_spawnflags & SF_FIRE_NO_IGNITE_SOUND) == false)
+		if (HasSpawnFlags(SF_FIRE_DO_IGNITE_SOUND))
 		{
 			if (m_StartSoundName.ToCStr() && m_StartSoundName.ToCStr()[0] != '\0')
 			{
