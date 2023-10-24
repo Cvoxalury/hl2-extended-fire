@@ -19,8 +19,8 @@
 		32: 	"No glow" : 0
 		128: 	"Delete when out" : 0
 		256: 	"Visible from above" : 0
-		512: 	"No Loop Sound" : 1 // EXTENDED_FIRE
-		1024: 	"No Ignite Sound" : 1 // EXTENDED_FIRE
+		512: 	"Emit Burning Sound" : 1 // EXTENDED_FIRE
+		1024: 	"Emit Ignite Sound" : 1 // EXTENDED_FIRE
 	]
 
 	ignitionpoint(float) : "Ignition Point" : 32 : "Amount of heat 'damage' to take before this flame should ignite."
