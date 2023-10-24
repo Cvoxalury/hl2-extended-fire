@@ -27,8 +27,8 @@
 #define SF_FIRE_DIE_PERMANENT		0x00000080
 #define SF_FIRE_VISIBLE_FROM_ABOVE	0x00000100
 #ifdef EXTENDED_FIRE
-#define SF_FIRE_NO_SOUND			0x00000200
-#define SF_FIRE_NO_IGNITE_SOUND		0x00000400
+#define SF_FIRE_DO_SOUND			0x00000200
+#define SF_FIRE_DO_IGNITE_SOUND		0x00000400
 #endif
 
 //==================================================
